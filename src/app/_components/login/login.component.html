@@ -1,0 +1,151 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col m4 offset-m4 s12">
+      <br>
+      <div class="card black-text">
+        <div class="card-content">
+          <form
+            class="login-form"
+            name="loginform"
+            [formGroup]="loginform"
+          >
+            <div class="row">
+              <div class="input-field col s12 center">
+                <h5 class="center-align">
+                  Log in with your email
+                </h5>
+                <h5 class="center-align">
+                   account
+                </h5>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <i class="material-icons prefix" style="line-height: 50px;">account_circle</i>
+                <input
+                  name="email"
+                  [formControl]="loginform.controls['email']"
+                  id="email"
+                  type="email"
+                  class="validate"
+                  autocomplete="off"
+                  required
+                />
+                <label for="email">Email</label>
+                <p
+                  class="red-text margin-0px font-size_13px"
+                  *ngIf="
+                    loginform.controls['email'].hasError('required') &&
+                    loginform.controls['email'].touched
+                  "
+                >
+                  Email required
+                </p>
+                <p
+                  class="red-text margin-0px font-size_13px"
+                  *ngIf="
+                    loginform.controls['email'].hasError('pattern') &&
+                    loginform.controls['email'].touched
+                  "
+                >
+                  Enter valid Email
+                </p>
+              </div>
+              <div class="input-field col s12">
+                <i class="material-icons prefix" style="line-height: 50px;">lock_outline</i>
+                <input
+                  name="password"
+                  [formControl]="loginform.controls['password']"
+                  id="password"
+                  type="password"
+                  class="validate"
+                  required
+                />
+                <label for="password">Password</label>
+                <p
+                  class="red-text margin-0px font-size_13px"
+                  *ngIf="
+                    loginform.controls['password'].hasError('required') &&
+                    loginform.controls['password'].touched
+                  "
+                >
+                  Password required
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col m6 offset-m3 s12">
+                <button
+                  [disabled]="!loginform.valid || loading == true"
+                  class="bgr-color-theme btn waves-effect waves-light col s12"
+                  (click)="
+                    verify(
+                      loginform.value.email,
+                      loginform.value.password
+                    )
+                  "
+                >
+                  Login
+                </button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <p class="margin center-align medium-small">
+                  <a
+                    [routerLink]="['/forgetpassword/sendemail']"
+                    routerLink="/signup"
+                    >Forgot your password?</a
+                  >
+
+                </p>
+              </div>
+            </div>
+            <div class="row" *ngIf="loading == true">
+              <div class="col s4 offset-s4 margin-left-25px">
+                <app-spinner> </app-spinner>
+              </div>
+            </div>
+            <div
+              class="row"
+              *ngIf="responseStatus.statusText == 'UNAUTHORIZED'"
+            >
+              <p class="red-text margin-0px font-size_13px center">
+                {{ responseStatus.error.status }}
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<div  id="registerModal"  materialize="modal"  [materializeParams]="[{ dismissible: false }]"  [materializeActions]="registerModalActions"  class="modal white"  style="width:750px;">
+  <div class="modal-content">
+    <a class="theme-textcolor-b1 waves-effect waves-light right modal-close margin-0px">
+       <i class="material-icons">close</i>
+    </a>
+    <h5 class="center black-text margin-left-20px">
+      Thanks for the registration. Please wait for account approval
+    </h5>
+    <div class="divider theme-color"></div>
+    <p class="center black-text">
+      In order to use Codex, your account must be approved by Codex Admin. An
+      email will be sent to you after account approval. In case, you do not
+      receive an email within 24 hours then contact us at support@x-prime.us.
+      Keep checking your inbox / spam.
+    </p>
+    <div class="row">
+      <div class="col s4 offset-s4">
+        <button (click)="gotoSignIn()" class="btn theme-color-b1 accent-4">
+          Done
+          <i class="material-icons right">done</i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

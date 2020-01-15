@@ -1,0 +1,210 @@
+
+  <div class="row">
+    <div class="col m4 offset-m4 s12">
+      <br>
+      <div class="card black-text">
+        <div class="card-content">
+          <form
+          class="login-form"
+          name="registerForm"
+          [formGroup]="registerForm"
+        >
+          <br />
+          <div class="row">
+            <div class="input-field col s12">
+              <h5 class="center-align">
+                Create a new account
+              </h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <i class="material-icons prefix" style="line-height: 50px;">account_circle</i>
+              <input
+                class="validate"
+                type="text"
+                id="firstname"
+                name="firstname"
+                [formControl]="registerForm.controls['firstname']"
+                required
+                autocomplete="off"
+              />
+              <label for="firstname" class="center-align"
+                >First name</label
+              >
+              <p
+                class="red-text margin-0px font-size_13px"
+                *ngIf="
+                  registerForm.controls['firstname'].hasError(
+                    'required'
+                  ) && registerForm.controls['firstname'].touched
+                "
+              >
+                First name required
+              </p>
+            </div>
+            <div class="input-field col s12 m6">
+              <input
+                class="validate"
+                id="lastname"
+                type="text"
+                name="lastname"
+                [formControl]="registerForm.controls['lastname']"
+                required
+                autocomplete="off"
+              />
+              <label for="lastname" class="center-align"
+                >Last name</label
+              >
+              <p
+                class="red-text margin-0px font-size_13px"
+                *ngIf="
+                  registerForm.controls['lastname'].hasError(
+                    'required'
+                  ) && registerForm.controls['lastname'].touched
+                "
+              >
+                First name required
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <i class="material-icons prefix" style="line-height: 50px;">email</i>
+              <input
+                id="email"
+                [formControl]="registerForm.controls['email']"
+                name="email"
+                type="email"
+                class="validate"
+                required
+                autocomplete="off"
+              />
+              <label for="email">Email</label>
+              <p
+                class="red-text margin-0px font-size_13px"
+                *ngIf="
+                  registerForm.controls['email'].hasError('required') &&
+                  registerForm.controls['email'].touched
+                "
+              >
+                Email required
+              </p>
+              <p
+                class="red-text margin-0px font-size_13px"
+                *ngIf="
+                  registerForm.controls['email'].hasError('pattern') &&
+                  registerForm.controls['email'].touched
+                "
+              >
+                Enter valid Email
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 m6">
+              <i class="material-icons prefix" style="line-height: 50px;">lock_outline</i>
+              <input
+                id="password"
+                [formControl]="registerForm.controls['password']"
+                name="password"
+                type="password"
+                class="validate"
+                ng-minlength="6"
+                required
+              />
+              <label for="password">Password</label>
+              <p
+                class="red-text margin-0px font-size_13px"
+                *ngIf="
+                  registerForm.controls['password'].hasError(
+                    'required'
+                  ) && registerForm.controls['password'].touched
+                "
+              >
+                Password required
+              </p>
+            </div>
+            <div class="input-field col s12 m6">
+              <input
+                id="confirmPassword"
+                [formControl]="registerForm.controls['confirmPassword']"
+                name="confirmPassword"
+                type="password"
+                class="validate"
+                required
+              />
+              <label for="confirmPassword">Confirm Password</label>
+              <p
+                class="red-text margin-0px font-size_13px"
+                *ngIf="
+                  registerForm.controls.confirmPassword.errors
+                    ?.MatchPassword
+                "
+              >
+                Passwords do not match.
+              </p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input-field col m4 offset-m8 s12">
+              <button
+                [disabled]="!registerForm.valid || loading == true"
+                class="bgr-color-theme btn waves-effect waves-light col s12"
+                (click)="register(registerForm.value)"
+              >
+                Register
+              </button>
+            </div>
+          </div>
+          <div class="row">
+            <app-spinner *ngIf="loading == true"> </app-spinner>
+          </div>
+
+          <div class="row" *ngIf="responseStatus.status == true">
+            <p class="red-text margin-0px font-size_13px center">
+              {{ responseStatus.msg }}
+            </p>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<div
+  id="registerModal"
+  materialize="modal"
+  [materializeParams]="[{ dismissible: false }]"
+  [materializeActions]="registerModalActions"
+  class="modal white"
+  style="width:750px;"
+>
+  <div class="modal-content">
+    <a
+      class="theme-textcolor-b1 waves-effect waves-light right modal-close margin-0px"
+    >
+      <i class="material-icons">close</i>
+    </a>
+    <h5 class="center black-text margin-left-20px">
+      Thanks for the registration. Please wait for account approval
+    </h5>
+    <div class="divider theme-color"></div>
+    <p class="center black-text">
+      In order to use Codex, your account must be approved by Codex Admin. An
+      email will be sent to you after account approval. In case, you do not
+      receive an email within 24 hours then contact us at support@x-prime.us.
+      Keep checking your inbox / spam.
+    </p>
+    <div class="row">
+      <div class="col s4 offset-s4">
+        <button (click)="gotoSignIn()" class="btn theme-color-b1 accent-4">
+          Done
+          <i class="material-icons right">done</i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

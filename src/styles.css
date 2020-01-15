@@ -1,0 +1,34 @@
+/* -----------------------------Customize Css-------------------------- */
+
+.bgr-color-theme {
+  background-color: #001627 !important;
+}
+.lr-pad-5 {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+.signup_btn:hover {
+  background-color: #ffffff !important;
+  border: 0.5px solid #ffffff;
+  border-radius: 40px !important;
+  color: black !important;
+}
+.signup_btn {
+  border: 0.5px solid;
+  border-radius: 40px !important;
+}
+.signup_btn:focus {
+  background-color: #ffffff !important;
+  border: 0.5px solid #ffffff;
+  border-radius: 40px !important;
+  color: black !important;
+}
+
+.margin-top-10 {
+  margin-top: 10% !important;
+}
+
+.input-field .prefix.active {
+  color: #5d6063 !important;
+}
+

@@ -1,0 +1,28 @@
+
+<nav>
+  <div class="nav-wrapper bgr-color-theme lr-pad-5">
+    <a routerLink="/welcome/home" class="brand-logo" data-aos="fade-down" data-aos-duration="1000">
+      <i class="material-icons">insert_chart</i> <b style="font-size: 16px;" class="right">&nbsp; ETL</b>
+    </a>
+    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+    <ul class="right hide-on-med-and-down">
+      <li *ngIf="!currentUser"><a routerLink="/welcome/home" data-aos="fade-down" data-aos-duration="1100">Home</a></li>
+      <li *ngIf="!currentUser"><a routerLink="/login" data-aos="fade-down" data-aos-duration="1100">Login</a></li>
+      <li *ngIf="!currentUser"><a routerLink="/signup" data-aos="fade-down" data-aos-duration="1600" class="waves-effect waves-light btn bgr-color-theme signup_btn">Sign Up</a></li>
+      <li *ngIf="currentUser"><a  class="tooltipped" materialize="tooltip" data-position="bottom" data-delay="50" data-tooltip="Dashboard" routerLink="/user/dashboard"><i class="material-icons">dashboard</i></a></li>
+      <li *ngIf="currentUser"><a  class="tooltipped" materialize="tooltip" data-position="bottom" data-delay="50" data-tooltip="Logout" (click)="logoutFunc()"><i class="material-icons">power_settings_new</i></a></li>
+    </ul>
+
+    <ul class="side-nav bgr-color-theme white-text" id="mobile-demo">
+      <br>
+      <br>
+      <li *ngIf="!currentUser"><a class="white-text" routerLink="/welcome/home">Home</a></li>
+      <li *ngIf="!currentUser"><a class="white-text" routerLink="/login">Log In</a></li>
+      <li *ngIf="!currentUser"><a class="white-text" routerLink="/signup" class="waves-effect waves-light btn bgr-color-theme signup_btn">Sign Up</a></li>
+      <li *ngIf="currentUser"><a  class="white-text" routerLink="/user/dashboard">Dashboard<i class="white-text material-icons left">dashboard</i></a></li>
+      <li *ngIf="currentUser"><a  class="white-text" (click)="logoutFunc()">Logout<i class="white-text material-icons left">power_settings_new</i></a></li>
+    </ul>
+  </div>
+</nav>
+<router-outlet></router-outlet>
+

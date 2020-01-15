@@ -1,0 +1,36 @@
+<br /><br />
+<div class="row">
+  <div class="col s12 l4 m5 offset-l4">
+    <div class="card-panel bgr-color-theme white-text">
+      <h5 class="center">Verify Email</h5>
+      <p class="center">Send email to reset password</p>
+      <form name="sendEmailForm" (submit)="sendEmail(userEmail)" #sendEmailForm="ngForm">
+      <div class="row">
+        <div class="input-field col s6 offset-s3">
+          <input id="email" type="email" [(ngModel)]="userEmail" class="validate" name="email" #email="ngModel" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+          <label for="email">Email</label>
+          <div class="error-block" *ngIf="email.errors && (email.dirty || email.touched)">
+            <p *ngIf="email.errors?.required" class="white-text">Email required</p>
+            <p *ngIf="email.errors?.pattern" class="white-text">Email is not valid</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s5 offset-s4">
+          <button [disabled]="!sendEmailForm.valid || loading == true"  type="submit" class="btn waves-effect waves-light white black-text">Send Email<i class="material-icons right">send</i></button>
+        </div>
+      </div>
+        <div class="row">
+          <app-spinner *ngIf="loading == true">
+          </app-spinner>
+        </div>
+        <div class="row"*ngIf="afterResponse.status == false">
+          <p class="center"><b>Sorry! Email not found</b></p>
+        </div>
+        <div class="row"*ngIf="afterResponse.status == true">
+          <p class="center"><b>Email is sent to you, kindly check email and close this window</b></p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
